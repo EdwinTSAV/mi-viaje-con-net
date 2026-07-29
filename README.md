@@ -17,6 +17,7 @@ Este material está pensado como una guía de estudio y consulta rápida, tanto 
 - [Introducción](docs/dotnet/README.md)
 - [Crear una solución de microservicios](docs/dotnet/crear-solucion-microservicios.md)
 - [Gestión de paquetes NuGet](docs/dotnet/paquetes-nuget.md)
+- [Crear conexión de microservicio a su base de datos](docs/dotnet/crear-conexion-bd.md)
 - [Entity Framework Core: migraciones](docs/dotnet/entity-framework-migraciones.md)
 - [Publicar un microservicio](docs/dotnet/publicar-proyecto.md)
 
@@ -32,16 +33,18 @@ Este material está pensado como una guía de estudio y consulta rápida, tanto 
 flowchart LR
     A[Arquitectura] --> B[.NET: crear solución]
     B --> C[.NET: paquetes NuGet]
-    C --> D[.NET: migraciones EF Core]
-    D --> E[.NET: publicar proyecto]
-    E --> F[Azure: desplegar en App Service]
+    C --> D[.NET: conexión a la BD]
+    D --> E[.NET: migraciones EF Core]
+    E --> F[.NET: publicar proyecto]
+    F --> G[Azure: desplegar en App Service]
 ```
 
 1. Comprende primero los **principios de Clean Architecture** y cómo se distribuyen las responsabilidades entre capas.
 2. Aprende a **crear la solución y los proyectos** de cada microservicio con `dotnet CLI`.
 3. Configura las **dependencias (NuGet)** necesarias por capa.
-4. Trabaja con **Entity Framework Core** para generar y aplicar migraciones.
-5. **Publica y despliega** el microservicio en Azure App Service.
+4. Configura la **conexión a la BD**.
+5. Trabaja con **Entity Framework Core** para generar y aplicar migraciones.
+6. **Publica y despliega** el microservicio en Azure App Service.
 
 > **Nota**
 > Esta documentación se basa en notas de aprendizaje personal, reorganizadas y ampliadas con buenas prácticas actuales de .NET y Azure. Donde se detectó información incompleta, se agregó contexto adicional indicándolo explícitamente.
