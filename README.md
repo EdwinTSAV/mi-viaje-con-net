@@ -20,6 +20,7 @@ Este material está pensado como una guía de estudio y consulta rápida, tanto 
 - [Gestión de paquetes NuGet](docs/dotnet/paquetes-nuget.md)
 - [Crear conexión de microservicio a su base de datos](docs/dotnet/crear-conexion-bd.md)
 - [Entity Framework Core: migraciones](docs/dotnet/entity-framework-migraciones.md)
+- [Preparar proyecto](docs/dotnet/preparar-proyecto.md)
 - [Crear una entidad (ejemplo Persona)](docs/dotnet/crear-entidad.md)
 - [Publicar un microservicio](docs/dotnet/publicar-proyecto.md)
 
@@ -33,12 +34,14 @@ Este material está pensado como una guía de estudio y consulta rápida, tanto 
 
 ```mermaid
 flowchart LR
-    A[Arquitectura] --> B[.NET: crear solución] --> C[.NET: publicar proyecto] --> D[Azure: desplegar en App Service]
+    A[Arquitectura] --> B[.NET: crear proyecto] --> C[.NET: publicar proyecto] --> D[Azure: desplegar en App Service]
 
-    B --> B1[.NET: paquetes NuGet]
-    B --> B2[.NET: conexión a la BD]
-    B --> B3[.NET: migraciones EF Core]
-    B --> B4[.NET: crear una entidad]
+    B --> B1[.NET: crear solución]
+    B1 --> B2[.NET: paquetes NuGet]
+    B2 --> B3[.NET: conexión a la BD]
+    B3 --> B4[.NET: migraciones EF Core]
+    B4 --> B5[.NET: preparar proyecto]
+    B5 --> B6[.NET: crear una entidad]
 ```
 
 1. Comprende primero los **principios de Clean Architecture** y cómo se distribuyen las responsabilidades entre capas.
