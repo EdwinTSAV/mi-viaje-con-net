@@ -6,8 +6,6 @@
 - [Parámetros clave](#parámetros-clave)
 - [Migraciones en proyectos con Clean Architecture](#migraciones-en-proyectos-con-clean-architecture)
 - [Migraciones en proyectos sin Clean Architecture](#migraciones-en-proyectos-sin-clean-architecture)
-- [Generar un script SQL de migración](#generar-un-script-sql-de-migración)
-- [Eliminar migraciones](#eliminar-migraciones)
 - [Buenas prácticas](#buenas-prácticas)
 - [Errores comunes](#errores-comunes)
 - [Recursos relacionados](#recursos-relacionados)
@@ -33,7 +31,7 @@ Permite mantener sincronizado el esquema de la base de datos con el modelo de do
 
 ## Migraciones en proyectos con Clean Architecture
 
-### Desde fuera de la carpeta `Infrastructure`
+Ejecutar los comandos fuera de la carpeta `Infrastructure`
 
 ### Ver el `DbContext` disponible (opcional, antes de migrar)
 
@@ -73,7 +71,9 @@ dotnet ef migrations remove --project SIGESUP.Infrastructure --startup-project S
 > **Advertencia**
 > `dotnet ef migrations remove` solo elimina la **última** migración generada y **no aplicada aún** a la base de datos. Si la migración ya fue aplicada, primero debes revertirla con `dotnet ef database update <MigraciónAnterior>` antes de eliminarla del código.
 
-### Alternativa: ejecutar los comandos desde dentro de la carpeta `Infrastructure`
+## Migraciones en proyectos sin Clean Architecture
+
+Ejecutar los comandos desde dentro de la carpeta `Infrastructure`
 
 ```bash
 cd ./MicroservicioUsuarios/Infrastructure
