@@ -10,6 +10,7 @@ Este material está pensado como una guía de estudio y consulta rápida, tanto 
 
 ### 🏛️ Arquitectura
 - [Introducción a la arquitectura](docs/arquitectura/README.md)
+- [Microservicios](docs/arquitectura/microservicios.md)
 - [Clean Architecture y arquitectura por capas](docs/arquitectura/clean-architecture.md)
 - [Estructura de carpetas por capa](docs/arquitectura/estructura-carpetas.md)
 
