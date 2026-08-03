@@ -78,8 +78,7 @@ Application/
 Infrastructure/
 ├── Persistence/
 │   ├── AppDbContext.cs
-│   ├── Configurations/  # IEntityTypeConfiguration
-│   └── Repositories/
+│   └── Configurations/  # IEntityTypeConfiguration
 ├── Services/            # Implementaciones de puertos
 └── DependencyInjection.cs  # extension method para registrar todo
 ```
@@ -110,6 +109,6 @@ API/
 ## Recursos relacionados
 
 - [Clean Architecture](clean-architecture.md)
-- [Crear una solución de microservicios](../dotnet/crear-solucion-microservicios.md)
+- [Crear un microservicio](../dotnet/2-crear-microservicio.md)
 
 [⬅ Volver al índice de arquitectura](README.md)

@@ -19,22 +19,15 @@ En una arquitectura por capas, **no todas las capas necesitan los mismos paquete
 
 ## Comandos básicos
 
-### Instalar un paquete
-
 ```bash
+# Instalar un paquete dentro de un proyecto
 dotnet add package AutoMapper
 dotnet add package AutoMapper --version 12.0.1
-```
 
-### Eliminar un paquete
-
-```bash
+# Eliminar un paquete dentro de un proyecto
 dotnet remove package AutoMapper
-```
 
-### Ver paquetes instalados
-
-```bash
+# Ver paquetes instalados dentro de un proyecto
 dotnet list package
 dotnet list package --include-transitive
 ```
@@ -42,13 +35,7 @@ dotnet list package --include-transitive
 ### Instalar un paquete en un proyecto específico desde la solución
 
 ```bash
-dotnet add ./MicroservicioUsuarios/API package Refit
-```
-
-Otro ejemplo, instalando el proveedor de PostgreSQL en la capa de Infraestructura de un proyecto llamado `SIGESUP`:
-
-```bash
-dotnet add SIGESUP.Infrastructure package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add ./MicroservicioPersona/API package Refit
 ```
 
 ## Paquetes esenciales recomendados por capa
@@ -64,13 +51,13 @@ dotnet add SIGESUP.Infrastructure package Npgsql.EntityFrameworkCore.PostgreSQL
 | **Infrastructure** | `Microsoft.EntityFrameworkCore.Tools` | Herramientas de CLI para migraciones |
 | **API** | `MediatR.Extensions.Microsoft.DependencyInjection` | Registrar MediatR en el contenedor de DI de la API |
 
-Instalación completa de ejemplo:
+Instalación completa de ejemplo desde la solución:
 
 ```bash
 # Application
 dotnet add ./MicroservicioUsuarios/Application/Application.csproj package MediatR
 dotnet add ./MicroservicioUsuarios/Application/Application.csproj package FluentValidation
-dotnet add ./MicroservicioUsuarios/Application/Application.csproj package AutoMapper
+dotnet add ./MicroservicioUsuarios/Application/Application.csproj package AutoMapper --version 14.0.0
 
 # Infrastructure
 dotnet add ./MicroservicioUsuarios/Infrastructure/Infrastructure.csproj package Microsoft.EntityFrameworkCore
@@ -95,8 +82,8 @@ dotnet add ./MicroservicioUsuarios/API/API.csproj package MediatR.Extensions.Mic
 
 ## Recursos relacionados
 
-- [Crear una solución de microservicios](crear-solucion-microservicios.md)
+- [Crear un microservicio](2-crear-microservicio.md)
 - [Clean Architecture](../arquitectura/clean-architecture.md)
 - [Entity Framework Core: migraciones](entity-framework-migraciones.md)
 
-[⬅ Volver al índice de .NET](README.md)
+⬅ [Volver al índice](README.md) | [Siguiente paso](4-crear-conexion-bd.md) ➡

@@ -2,12 +2,11 @@
 
 ## Tabla de contenido
 - [¿Para qué sirve?](#para-qué-sirve)
-- [1. Instalar los paquetes NuGet](#1-instalar-los-paquetes-nuget)
-- [2. Crear la estructura de la carpeta Persistence](#2-crear-la-estructura-de-la-carpeta-persistence)
-- [3. Crear el DbContext](#3-crear-el-dbcontext)
-- [4. Crear DependencyInjection](#4-crear-dependencyinjection)
-- [5. Agregar la cadena de conexión](#5-agregar-la-cadena-de-conexión)
-- [6. Registrar Infrastructure](#6-registrar-infrastructure)
+- [1. Crear la estructura de la carpeta Persistence](#1-crear-la-estructura-de-la-carpeta-persistence)
+- [2. Crear el DbContext](#2-crear-el-dbcontext)
+- [3. Crear DependencyInjection](#3-crear-dependencyinjection)
+- [4. Agregar la cadena de conexión](#4-agregar-la-cadena-de-conexión)
+- [5. Registrar Infrastructure](#5-registrar-infrastructure)
 - [Buenas prácticas](#buenas-prácticas)
 - [Recursos relacionados](#recursos-relacionados)
 
@@ -15,29 +14,7 @@
 
 Este documento cubre la **configuración mínima necesaria** para conectar la capa `Infrastructure` de un microservicio a una base de datos real a través de **Entity Framework Core**: instalar el proveedor correspondiente, crear el `DbContext`, registrar la infraestructura en el contenedor de dependencias y definir la cadena de conexión.
 
-Es el paso previo indispensable antes de poder trabajar con [migraciones de Entity Framework Core](entity-framework-migraciones.md), ya que sin un `DbContext` correctamente registrado no es posible generar ni aplicar migraciones.
-
-## 1. Instalar los paquetes NuGet
-
-En la capa `Infrastructure`, instala EF Core junto con el proveedor de base de datos correspondiente (en este ejemplo, PostgreSQL):
-
-```bash
-dotnet add Infrastructure package Microsoft.EntityFrameworkCore
-dotnet add Infrastructure package Npgsql.EntityFrameworkCore.PostgreSQL
-```
-
-> **Nota**
-> Si usas SQL Server en lugar de PostgreSQL, instala `Microsoft.EntityFrameworkCore.SqlServer` en su lugar (ver [Gestión de paquetes NuGet](paquetes-nuget.md)).
-
-En `API`, asegúrate de tener la referencia al proyecto `Infrastructure` (y las demás referencias entre capas). Si ya seguiste la guía de [creación de la solución](crear-solucion-microservicios.md), estas referencias ya deberían existir:
-
-```bash
-dotnet add src/MiProyecto.API reference src/MiProyecto.Infrastructure
-dotnet add src/MiProyecto.Infrastructure reference src/MiProyecto.Application
-dotnet add src/MiProyecto.Application reference src/MiProyecto.Domain
-```
-
-## 2. Crear la estructura de la carpeta Persistence
+## 1. Crear la estructura de la carpeta Persistence
 
 ```text
 Infrastructure/
@@ -46,10 +23,7 @@ Infrastructure/
 └── DependencyInjection.cs
 ```
 
-> **Tip**
-> Esta es la estructura mínima para levantar la conexión. A medida que agregues entidades, esta carpeta también alojará `Configurations/` (para las clases `IEntityTypeConfiguration`) y `Repositories/`, tal como se describe en [Estructura de carpetas por capa](../arquitectura/estructura-carpetas.md).
-
-## 3. Crear el DbContext
+## 2. Crear el DbContext
 
 Archivo donde se registran las configuraciones y los `DbSet` de las entidades:
 
@@ -62,19 +36,21 @@ public class AppDbContext(
     DbContextOptions<AppDbContext> options
 ) : DbContext(options)
 {
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+    }
 }
 ```
 
-> **Nota**
-> Este ejemplo usa **constructores primarios** (disponibles desde C# 12 / .NET 8). Si tu proyecto usa una versión anterior de .NET, declara el constructor de forma tradicional:
+> **Tip**
+> Cuando el proyecto tenga varias entidades, en lugar de agregar una línea `ApplyConfiguration(...)` por cada una, se puede escanear todo el assembly automáticamente:
 > ```csharp
-> public class AppDbContext : DbContext
-> {
->     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-> }
+> modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
 > ```
 
-## 4. Crear DependencyInjection
+## 3. Crear DependencyInjection
 
 Archivo donde se registra toda la infraestructura del proyecto:
 
@@ -104,7 +80,7 @@ public static class DependencyInjection
 }
 ```
 
-## 5. Agregar la cadena de conexión
+## 4. Agregar la cadena de conexión
 
 En `API/appsettings.json`:
 
@@ -119,7 +95,7 @@ En `API/appsettings.json`:
 > **Advertencia**
 > El ejemplo anterior es válido únicamente para un entorno **local de desarrollo**. Nunca subas contraseñas reales al repositorio dentro de `appsettings.json`. Para entornos de staging o producción, usa `appsettings.Development.json` (ignorado en Git) para credenciales locales, y **Azure Key Vault** o las **App Settings** del servicio de hosting para credenciales productivas, tal como se indica en [Despliegue en Azure App Service](../azure/app-service-deployment.md#paso-4--configurar-el-connection-string).
 
-## 6. Registrar Infrastructure
+## 5. Registrar Infrastructure
 
 En `API/Program.cs`:
 
@@ -133,13 +109,12 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 - Mantén el nombre de la clave de la cadena de conexión (`DefaultConnection`) consistente entre todos los microservicios, salvo que necesites distinguir varias bases de datos en un mismo servicio.
 - No agregues lógica de negocio dentro de `AppDbContext`; su única responsabilidad es representar el modelo de persistencia.
-- Una vez configurada la conexión, continúa con la generación de la primera migración (ver [Entity Framework Core: migraciones](entity-framework-migraciones.md)).
 
 ## Recursos relacionados
 
-- [Crear una solución de microservicios](crear-solucion-microservicios.md)
-- [Gestión de paquetes NuGet](paquetes-nuget.md)
+- [Crear un microservicio](2-crear-microservicio.md)
+- [Gestión de paquetes NuGet](3-paquetes-nuget.md)
 - [Clean Architecture](../arquitectura/clean-architecture.md)
 - [Entity Framework Core: migraciones](entity-framework-migraciones.md)
 
-[⬅ Volver al índice de .NET](README.md)
+⬅ [Volver al índice](README.md)

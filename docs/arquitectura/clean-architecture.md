@@ -173,7 +173,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 ## Recursos relacionados
 
 - [Estructura de carpetas por capa](estructura-carpetas.md)
-- [Crear una solución de microservicios](../dotnet/crear-solucion-microservicios.md)
-- [Gestión de paquetes NuGet](../dotnet/paquetes-nuget.md)
+- [Crear un microservicio](../dotnet/2-crear-microservicio.md)
+- [Gestión de paquetes NuGet](../dotnet/3-paquetes-nuget.md)
 
 [⬅ Volver al índice de arquitectura](README.md)
