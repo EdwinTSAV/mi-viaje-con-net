@@ -8,14 +8,12 @@ Este material está pensado como una guía de estudio y consulta rápida, tanto 
 
 ## 📂 Índice
 
-### 🏛️ Arquitectura
-- [Introducción a la arquitectura](docs/arquitectura/README.md)
+### [🏛️ Arquitectura](docs/arquitectura/README.md)
 - [Microservicios](docs/arquitectura/microservicios.md)
 - [Clean Architecture y arquitectura por capas](docs/arquitectura/clean-architecture.md)
 - [Estructura de carpetas por capa](docs/arquitectura/estructura-carpetas.md)
 
-### ⚙️ .NET
-- [Introducción](docs/dotnet/README.md)
+### [⚙️ .NET](docs/dotnet/README.md)
 - [Crear una solución de microservicios](docs/dotnet/crear-solucion-microservicios.md)
 - [Gestión de paquetes NuGet](docs/dotnet/paquetes-nuget.md)
 - [Crear conexión de microservicio a su base de datos](docs/dotnet/crear-conexion-bd.md)
@@ -23,9 +21,7 @@ Este material está pensado como una guía de estudio y consulta rápida, tanto 
 - [Preparar proyecto](docs/dotnet/preparar-proyecto.md)
 - [Crear una entidad (ejemplo Persona)](docs/dotnet/crear-entidad.md)
 - [Publicar un microservicio](docs/dotnet/publicar-proyecto.md)
-
-### ☁️ Azure
-- [Introducción](docs/azure/README.md)
+### [☁️ Azure](docs/azure/README.md)
 - [Despliegue en Azure App Service](docs/azure/app-service-deployment.md)
 
 ---
@@ -52,5 +48,3 @@ flowchart LR
 6. Construye tu **primer entidad** completo (entidad, configuración, repositorio).
 7. **Publica y despliega** el microservicio en Azure App Service.
 
-> **Nota**
-> Esta documentación se basa en notas de aprendizaje personal, reorganizadas y ampliadas con buenas prácticas actuales de .NET y Azure. Donde se detectó información incompleta, se agregó contexto adicional indicándolo explícitamente.
