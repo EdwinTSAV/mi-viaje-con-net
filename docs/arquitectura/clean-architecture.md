@@ -134,4 +134,4 @@ sequenceDiagram
 - [Crear un microservicio](../dotnet/2-crear-microservicio.md)
 - [Gestión de paquetes NuGet](../dotnet/3-paquetes-nuget.md)
 
-⬅ [Volver: Microservicios](microservicios.md) | [Siguiente: Estructura de carpetas](estructura-carpetas.md) ➡
+⬅ [Microservicios](microservicios.md) | [Estructura de carpetas](estructura-carpetas.md) ➡

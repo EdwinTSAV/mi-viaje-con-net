@@ -116,4 +116,4 @@ API/
 - [Clean Architecture](clean-architecture.md)
 - [Crear un microservicio](../dotnet/2-crear-microservicio.md)
 
-⬅ [Volver: Clean Architecture](clean-architecture.md) | [Volver al índice](../../README.md)
+⬅ [Clean Architecture](clean-architecture.md) | [Finalizar](../../README.md)
