@@ -61,16 +61,19 @@ Application/
 │       ├── GetUsuarioByIdQuery.cs
 │       └── GetUsuarioByIdQueryHandler.cs
 ├── DTOs/
-└── Interfaces/          # IEmailService, etc. (puertos)
+├── Repositories/           # Contratos de persistencia (IUserRepository, etc.)
+└── Services/               # Contratos de servicios externos (IEmailService, etc.)
 ```
 
 - **Commands**: operaciones que modifican el estado (crear, actualizar, eliminar).
 - **Queries**: operaciones de solo lectura.
 - **DTOs**: objetos de transferencia de datos entre capas.
-- **Interfaces**: contratos o puertos que representan servicios externos (por ejemplo, envío de correos, `IUsuarioRepository`), implementados luego en `Infrastructure`.
+- **Repositories**: contratos (interfaces) encargados de abstraer el acceso a la persistencia de datos, por ejemplo IUsuarioRepository.
+- **Services**: contratos (interfaces) que representan dependencias externas al dominio, como servicios de correo, almacenamiento de archivos, caché, autenticación o mensajería.
 
 > **Nota**
-> Cada carpeta de caso de uso (por ejemplo, `CreateUsuario`) agrupa el comando, su handler y su validador en un mismo lugar. Este enfoque se conoce como **Vertical Slice** aplicado dentro de la capa `Application`.
+> Tanto los Repositories como los Services son abstracciones (puertos) definidas en Application. Sus implementaciones concretas se encuentran en Infrastructure
+> Cada carpeta de caso de uso (por ejemplo, `CreateUsuario`) agrupa el comando, su handler y su validador en un mismo lugar. Este enfoque se conoce como **Vertical Slice**, ya que organiza el código por funcionalidad en lugar de hacerlo por tipo de archivo.
 
 ## Infrastructure
 
@@ -78,8 +81,10 @@ Application/
 Infrastructure/
 ├── Persistence/
 │   ├── AppDbContext.cs
-│   └── Configurations/  # IEntityTypeConfiguration
-├── Services/            # Implementaciones de puertos
+│   ├── Configurations/     # IEntityTypeConfiguration
+│   ├── Repositories/       # Implementaciones de contratos de persistencia
+│   └── Migrations/
+├── Services/               # Implementaciones de puertos
 └── DependencyInjection.cs  # extension method para registrar todo
 ```
 
@@ -111,4 +116,4 @@ API/
 - [Clean Architecture](clean-architecture.md)
 - [Crear un microservicio](../dotnet/2-crear-microservicio.md)
 
-[⬅ Volver al índice de arquitectura](README.md)
+⬅ [Volver: Clean Architecture](clean-architecture.md) | [Volver al índice](../../README.md)

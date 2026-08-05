@@ -74,4 +74,4 @@ Ambos conceptos son independientes pero se complementan bien: **microservicios**
 - [Estructura de carpetas por capa](estructura-carpetas.md)
 - [Crear un microservicio](../dotnet/2-crear-microservicio.md)
 
-[⬅ Volver al índice de arquitectura](README.md)
+⬅ [Volver al índice](README.md) | [Siguiente: Clean Architecture](clean-architecture.md) ➡

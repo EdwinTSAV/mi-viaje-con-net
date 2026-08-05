@@ -9,7 +9,6 @@
 - [Ventajas](#ventajas)
 - [Desventajas](#desventajas)
 - [Flujo de funcionamiento](#flujo-de-funcionamiento)
-- [Ejemplo práctico en .NET](#ejemplo-práctico-en-net)
 - [Buenas prácticas](#buenas-prácticas)
 - [Errores comunes](#errores-comunes)
 - [Recursos relacionados](#recursos-relacionados)
@@ -63,21 +62,25 @@ flowchart LR
 - Referencia a `Application`.
 - Contiene los `Controllers`, `DTOs` de entrada/salida HTTP y el `Program.cs` (punto de entrada de la aplicación).
 - Es la capa "más externa": expone el microservicio al mundo exterior (HTTP, gRPC, etc.).
+- No debe contener lógica de negocio.
 
 ### Application
 - Referencia a `Domain`.
 - Contiene los servicios de aplicación, casos de uso (commands/queries) e interfaces (como por ejemplo, `IRepository`) que serán implementadas en `Infrastructure`.
 - Orquesta la lógica de negocio, pero no la implementa directamente: delega en el `Domain`.
+-No conoce detalles de implementación como bases de datos, EF Core o servicios externos.
 
 ### Domain
 - No referencia a ninguna otra capa.
 - Contiene las **entidades**, **objetos de valor (Value Objects)**.
 - Es el corazón de la aplicación: aquí vive la lógica de negocio pura, sin dependencias externas.
+- Debe poder evolucionar sin depender de la infraestructura utilizada.
 
 ### Infrastructure
 - Referencia a `Domain` y, opcionalmente, a `Application`.
 - Contiene los repositorios, el `DbContext` de EF Core, el acceso a datos y la integración con servicios externos (correo, almacenamiento, colas de mensajes, etc.).
 - Implementa las interfaces definidas en `Application`.
+- Es la capa responsable de los detalles tecnológicos de la aplicación.
 
 ## Ventajas
 
@@ -111,51 +114,6 @@ sequenceDiagram
     API-->>Cliente: HTTP Response
 ```
 
-## Ejemplo práctico en .NET
-
-Registro de dependencias respetando la separación por capas:
-
-```csharp
-// Infrastructure/DependencyInjection.cs
-public static class DependencyInjection
-{
-    public static IServiceCollection AddInfrastructure(
-        this IServiceCollection services,
-        IConfiguration configuration)
-    {
-        services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("Default")));
-
-        services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-        return services;
-    }
-}
-```
-
-```csharp
-// Application/DependencyInjection.cs
-public static class DependencyInjection
-{
-    public static IServiceCollection AddApplication(this IServiceCollection services)
-    {
-        services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-        services.AddAutoMapper(Assembly.GetExecutingAssembly());
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-        return services;
-    }
-}
-```
-
-```csharp
-// API/Program.cs
-builder.Services.AddApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
-```
-
-> **Tip**
-> Cada capa expone su propio método de extensión (`AddApplication`, `AddInfrastructure`) para mantener el `Program.cs` limpio y legible, delegando el detalle de registro a cada proyecto.
-
 ## Buenas prácticas
 
 - Define las interfaces en `Application`, nunca en `Infrastructure`.
@@ -172,8 +130,8 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 ## Recursos relacionados
 
-- [Estructura de carpetas por capa](estructura-carpetas.md)
+- [Estructura de carpetas](estructura-carpetas.md)
 - [Crear un microservicio](../dotnet/2-crear-microservicio.md)
 - [Gestión de paquetes NuGet](../dotnet/3-paquetes-nuget.md)
 
-[⬅ Volver al índice de arquitectura](README.md)
+⬅ [Volver: Microservicios](microservicios.md) | [Siguiente: Estructura de carpetas](estructura-carpetas.md) ➡
