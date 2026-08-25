@@ -11,7 +11,7 @@
 > **Nota**
 > Este flujo asume que ya tienes: la solución creada, revisa primero [Crear la solución general](1-crear-solucion-general.md).
 
-Permite levantar rápidamente el esqueleto de un nuevo microservicio de forma consistente, asegurando que las referencias entre proyectos respeten la [regla de dependencias](../arquitectura/clean-architecture.md#regla-principal-de-dependencias) de Clean Architecture. Los comandos deben ejecutarse desde la raíz donde está el archivo `.slnx`:
+Permite levantar rápidamente el esqueleto de un nuevo microservicio de forma consistente, asegurando que las referencias entre proyectos respeten la [regla de dependencias](../../arquitectura/clean-architecture.md#regla-principal-de-dependencias) de Clean Architecture. Los comandos deben ejecutarse desde la raíz donde está el archivo `.slnx`:
 
 ## 1. Crear la estructura de un microservicio
 
@@ -88,6 +88,6 @@ dotnet remove ./MicroservicioPersona/API/MicroservicioPersona.API.csproj referen
 
 ## Recursos relacionados
 
-- [Clean Architecture](../arquitectura/clean-architecture.md)
+- [Clean Architecture](../../arquitectura/clean-architecture.md)
 
 ⬅ [Volver al índice](README.md) | [Siguiente paso](3-paquetes-nuget.md) ➡

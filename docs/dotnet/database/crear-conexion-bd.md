@@ -44,12 +44,6 @@ public class AppDbContext(
 }
 ```
 
-> **Tip**
-> Cuando el proyecto tenga varias entidades, en lugar de agregar una línea `ApplyConfiguration(...)` por cada una, se puede escanear todo el assembly automáticamente:
-> ```csharp
-> modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
-> ```
-
 ## 3. Crear DependencyInjection
 
 Archivo donde se registra toda la infraestructura del proyecto:
@@ -93,7 +87,7 @@ En `API/appsettings.json`:
 ```
 
 > **Advertencia**
-> El ejemplo anterior es válido únicamente para un entorno **local de desarrollo**. Nunca subas contraseñas reales al repositorio dentro de `appsettings.json`. Para entornos de staging o producción, usa `appsettings.Development.json` (ignorado en Git) para credenciales locales, y **Azure Key Vault** o las **App Settings** del servicio de hosting para credenciales productivas, tal como se indica en [Despliegue en Azure App Service](../azure/app-service-deployment.md#paso-4--configurar-el-connection-string).
+> El ejemplo anterior es válido únicamente para un entorno **local de desarrollo**. Nunca subas contraseñas reales al repositorio dentro de `appsettings.json`. Para entornos de staging o producción, usa `appsettings.Development.json` (ignorado en Git) para credenciales locales, y **Azure Key Vault** o las **App Settings** del servicio de hosting para credenciales productivas, tal como se indica en [Despliegue en Azure App Service](../../azure/app-service-deployment.md#paso-4--configurar-el-connection-string).
 
 ## 5. Registrar Infrastructure
 
@@ -112,9 +106,9 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 ## Recursos relacionados
 
-- [Crear un microservicio](2-crear-microservicio.md)
-- [Gestión de paquetes NuGet](3-paquetes-nuget.md)
-- [Clean Architecture](../arquitectura/clean-architecture.md)
-- [Entity Framework Core: migraciones](entity-framework-migraciones.md)
+- [Crear un microservicio](./../estructura/2-crear-microservicio.md)
+- [Gestión de paquetes NuGet](./../estructura/3-paquetes-nuget.md)
+- [Clean Architecture](../../arquitectura/clean-architecture.md)
+- [Entity Framework Core: migraciones](migraciones.md)
 
-⬅ [Volver al índice](README.md)
+⬅ [Volver al índice](README.md) | [Siguiente paso](migraciones.md) ➡

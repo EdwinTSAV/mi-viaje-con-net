@@ -86,7 +86,7 @@ dotnet add ./MicroservicioUsuarios/API/API.csproj package MediatR.Extensions.Mic
 ## Recursos relacionados
 
 - [Crear un microservicio](2-crear-microservicio.md)
-- [Clean Architecture](../arquitectura/clean-architecture.md)
-- [Entity Framework Core: migraciones](entity-framework-migraciones.md)
+- [Clean Architecture](../../arquitectura/clean-architecture.md)
+- [Entity Framework Core: migraciones](./../database/migraciones.md)
 
-⬅ [Volver al índice](README.md) | [Siguiente paso](4-crear-conexion-bd.md) ➡
+⬅ [Volver al índice](README.md) | [Siguiente paso](./../database/README.md) ➡

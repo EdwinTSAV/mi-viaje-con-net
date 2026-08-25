@@ -117,6 +117,6 @@ dotnet ef migrations add Initial1.0.0 \
 
 - [Gestión de paquetes NuGet](paquetes-nuget.md)
 - [Publicar un microservicio](publicar-proyecto.md)
-- [Despliegue en Azure App Service](../azure/app-service-deployment.md)
+- [Despliegue en Azure App Service](../../azure/app-service-deployment.md)
 
 [⬅ Volver al índice de .NET](README.md)
