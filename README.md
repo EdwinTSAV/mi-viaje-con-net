@@ -14,9 +14,8 @@ Este material está pensado como una guía de estudio y consulta rápida, tanto 
 - [Estructura de carpetas por capa](docs/arquitectura/estructura-carpetas.md)
 
 ### [⚙️ .NET](docs/dotnet/README.md)
-- [Crear una solución de microservicios](docs/dotnet/crear-solucion-microservicios.md)
-- [Gestión de paquetes NuGet](docs/dotnet/paquetes-nuget.md)
-- [Crear conexión de microservicio a su base de datos](docs/dotnet/crear-conexion-bd.md)
+- [Estructura de un microservicio](docs/dotnet/estructura/README.md)
+- [Interacción con la base de datos](docs/dotnet/database/README.md)
 - [Entity Framework Core: migraciones](docs/dotnet/entity-framework-migraciones.md)
 - [Preparar proyecto](docs/dotnet/preparar-proyecto.md)
 - [Crear una entidad (ejemplo Persona)](docs/dotnet/crear-entidad.md)

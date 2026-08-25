@@ -9,6 +9,9 @@
 - [Errores comunes](#errores-comunes)
 - [Recursos relacionados](#recursos-relacionados)
 
+> **Nota**
+> Este flujo asume que ya tienes: la estructura del microservicio creado (revisa primero [Crear microservicio](2-crear-microservicio.md)).
+
 ## ¿Qué es?
 
 **NuGet** es el gestor de paquetes oficial de .NET. Permite instalar, actualizar y eliminar librerías de terceros (o de Microsoft) en un proyecto específico dentro de la solución.
