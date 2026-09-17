@@ -9,13 +9,13 @@ Guía de estudio y consulta rápida, tanto para desarrolladores que están empez
 ## Índice
 
 ### Arquitectura
-- Introducción a la arquitectura [(Ver mas ...)](docs/arquitectura/README.md)
+- Introducción a la arquitectura [(Ver ➡)](docs/arquitectura/README.md)
 - [Microservicios](docs/arquitectura/microservicios.md)
 - [Clean Architecture y arquitectura por capas](docs/arquitectura/clean-architecture.md)
 - [Estructura de carpetas por capa](docs/arquitectura/estructura-carpetas.md)
 
 ### .NET
-- Introducción [(Ver mas ...)](docs/dotnet/README.md)
+- Introducción [(Ver ➡)](docs/dotnet/README.md)
 - [Estructura de un microservicio](docs/dotnet/estructura/README.md)
 - [Interacción con la base de datos](docs/dotnet/database/README.md)
 - [Preparar proyecto](docs/dotnet/preparar-proyecto.md)
@@ -23,7 +23,7 @@ Guía de estudio y consulta rápida, tanto para desarrolladores que están empez
 - [Publicar un microservicio](docs/dotnet/publicar-proyecto.md)
 
 ### Azure
-- Introducción [(Ver mas ...)](docs/azure/README.md)
+- Introducción [(Ver ➡)](docs/azure/README.md)
 - [Despliegue en Azure App Service](docs/azure/app-service-deployment.md)
 
 ---
