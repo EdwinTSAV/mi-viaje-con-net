@@ -1,17 +1,5 @@
 # Microservicios
 
-## Tabla de contenido
-- [¿Qué es?](#qué-es)
-- [¿Para qué sirve?](#para-qué-sirve)
-- [¿Cuándo utilizarlo?](#cuándo-utilizarlo)
-- [Monolito vs. Microservicios](#monolito-vs-microservicios)
-- [Ventajas](#ventajas)
-- [Desventajas](#desventajas)
-- [Microservicios + Clean Architecture](#microservicios--clean-architecture)
-- [Recursos relacionados](#recursos-relacionados)
-
-## ¿Qué es?
-
 Una **arquitectura de microservicios** divide una aplicación en varios servicios pequeños, independientes y desplegables por separado, donde cada uno se encarga de una **responsabilidad de negocio concreta** (por ejemplo, un microservicio de Usuarios, otro de Facturación, otro de Notificaciones) y se comunica con los demás a través de la red (HTTP, mensajería, gRPC, etc.).
 
 ```mermaid
@@ -61,17 +49,8 @@ No conviene, o conviene empezar por un **monolito bien organizado**, cuando:
 - Las transacciones que abarcan varios servicios ya no son triviales (no hay una única base de datos ni un único `SaveChanges`).
 - Requiere más infraestructura desde el día uno (contenedores, CI/CD por servicio, observabilidad).
 
-> **Nota**
-> Estos dos últimos puntos —comunicación entre servicios y consistencia de datos distribuida— se documentarán en detalle más adelante, en la fase de la ruta de aprendizaje dedicada a comunicación entre microservicios (proxies, mensajería) y patrones de consistencia (Sagas, Outbox).
-
 ## Microservicios + Clean Architecture
 
-Ambos conceptos son independientes pero se complementan bien: **microservicios** define cómo se divide el sistema en servicios separados; **Clean Architecture** (ver [Clean Architecture](clean-architecture.md)) define cómo se organiza el código **dentro** de cada uno de esos servicios. Por eso cada microservicio de este proyecto (por ejemplo, `MicroservicioUsuarios`) tiene internamente sus propias capas `API`, `Application`, `Domain` e `Infrastructure`.
+Ambos conceptos son independientes pero se complementan bien: **microservicios** define cómo se divide el sistema en servicios separados; **Clean Architecture** define cómo se organiza el código **dentro** de cada uno de esos servicios. Por eso cada microservicio de este proyecto (por ejemplo, `MicroservicioUsuarios`) tiene internamente sus propias capas `API`, `Application`, `Domain` e `Infrastructure`.
 
-## Recursos relacionados
-
-- [Clean Architecture](clean-architecture.md)
-- [Estructura de carpetas por capa](estructura-carpetas.md)
-- [Crear un microservicio](../dotnet/2-crear-microservicio.md)
-
-⬅ [Índice Arquitectura](README.md) | [Clean Architecture](clean-architecture.md) ➡
+[⬅](README.md) Índice Arquitectura | Clean Architecture [➡](clean-architecture.md)

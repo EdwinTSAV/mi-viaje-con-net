@@ -1,21 +1,6 @@
 # Clean Architecture (Arquitectura por Capas)
 
-## Tabla de contenido
-- [¿Qué es?](#qué-es)
-- [¿Para qué sirve?](#para-qué-sirve)
-- [¿Cuándo utilizarla?](#cuándo-utilizarla)
-- [Regla principal de dependencias](#regla-principal-de-dependencias)
-- [Responsabilidad de cada capa](#responsabilidad-de-cada-capa)
-- [Ventajas](#ventajas)
-- [Desventajas](#desventajas)
-- [Flujo de funcionamiento](#flujo-de-funcionamiento)
-- [Buenas prácticas](#buenas-prácticas)
-- [Errores comunes](#errores-comunes)
-- [Recursos relacionados](#recursos-relacionados)
-
-## ¿Qué es?
-
-**Clean Architecture** es un patrón de diseño de software propuesto por Robert C. Martin ("Uncle Bob") que organiza el código en **capas concéntricas**, donde las reglas de negocio (el dominio) se ubican en el centro y quedan completamente aisladas de detalles técnicos como bases de datos, frameworks web o servicios externos.
+Patrón de diseño de software que organiza el código en **capas concéntricas**, donde las reglas de negocio (el dominio) se ubican en el centro y quedan completamente aisladas de detalles técnicos como bases de datos, frameworks web o servicios externos.
 
 En un proyecto .NET, esto se traduce normalmente en **cuatro proyectos separados** dentro de la solución: `API`, `Application`, `Domain` e `Infrastructure`.
 
@@ -60,15 +45,13 @@ flowchart LR
 
 ### API
 - Referencia a `Application`.
-- Contiene los `Controllers`, `DTOs` de entrada/salida HTTP y el `Program.cs` (punto de entrada de la aplicación).
 - Es la capa "más externa": expone el microservicio al mundo exterior (HTTP, gRPC, etc.).
 - No debe contener lógica de negocio.
 
 ### Application
 - Referencia a `Domain`.
-- Contiene los servicios de aplicación, casos de uso (commands/queries) e interfaces (como por ejemplo, `IRepository`) que serán implementadas en `Infrastructure`.
 - Orquesta la lógica de negocio, pero no la implementa directamente: delega en el `Domain`.
--No conoce detalles de implementación como bases de datos, EF Core o servicios externos.
+- No conoce detalles de implementación como bases de datos, EF Core o servicios externos.
 
 ### Domain
 - No referencia a ninguna otra capa.
@@ -78,8 +61,7 @@ flowchart LR
 
 ### Infrastructure
 - Referencia a `Domain` y, opcionalmente, a `Application`.
-- Contiene los repositorios, el `DbContext` de EF Core, el acceso a datos y la integración con servicios externos (correo, almacenamiento, colas de mensajes, etc.).
-- Implementa las interfaces definidas en `Application`.
+- Contiene el `DbContext` de EF Core, el acceso a datos y la integración con servicios externos.
 - Es la capa responsable de los detalles tecnológicos de la aplicación.
 
 ## Ventajas
@@ -123,15 +105,9 @@ sequenceDiagram
 
 ## Errores comunes
 
-- ❌ Referenciar `Infrastructure` directamente desde `Domain` o `Application`.
-- ❌ Colocar lógica de negocio dentro de los `Controllers` de la API.
-- ❌ Ubicar el `DbContext` fuera de `Infrastructure`.
-- ❌ Duplicar entidades entre capas en lugar de reutilizar las del `Domain`.
+- Referenciar `Infrastructure` directamente desde `Domain` o `Application`.
+- Colocar lógica de negocio dentro de los `Controllers` de la API.
+- Ubicar el `DbContext` fuera de `Infrastructure`.
+- Duplicar entidades entre capas en lugar de reutilizar las del `Domain`.
 
-## Recursos relacionados
-
-- [Estructura de carpetas](estructura-carpetas.md)
-- [Crear un microservicio](../dotnet/2-crear-microservicio.md)
-- [Gestión de paquetes NuGet](../dotnet/3-paquetes-nuget.md)
-
-⬅ [Microservicios](microservicios.md) | [Estructura de carpetas](estructura-carpetas.md) ➡
+[⬅](microservicios.md) Microservicios | Estructura de carpetas [➡](estructura-carpetas.md)
