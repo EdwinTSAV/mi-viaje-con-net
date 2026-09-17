@@ -20,10 +20,6 @@ Guía de estudio y consulta rápida para el diseño, construcción y despliegue 
 - Crear una entidad (ejemplo Persona) [➡](docs/dotnet/crear-entidad.md)
 - Publicar un microservicio [➡](docs/dotnet/publicar-proyecto.md)
 
-### Azure
-- Introducción [➡](docs/azure/README.md)
-- Despliegue en Azure App Service [➡](docs/azure/app-service-deployment.md)
-
 ---
 
 1. **Principios de Clean Architecture** y distribución de las responsabilidades entre capas.
@@ -32,4 +28,3 @@ Guía de estudio y consulta rápida para el diseño, construcción y despliegue 
 4. Configurar la **conexión a la BD**.
 5. Trabajar con **Entity Framework Core** para generar y aplicar migraciones.
 6. Crear un microservicio.
-7. **Publicar y desplegar**.
