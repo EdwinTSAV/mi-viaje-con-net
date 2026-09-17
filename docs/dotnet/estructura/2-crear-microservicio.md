@@ -1,25 +1,17 @@
-# Crear la estructura de un microservicio con .NET CLI
-
-## Tabla de contenido
-- [1. Crear la estructura de un microservicio](#1-crear-la-estructura-de-un-microservicio)
-- [2. Referenciar proyectos entre capas](#2-referenciar-proyectos-entre-capas)
-- [3. Eliminar una referencia](#3-eliminar-una-referencia)
-- [Buenas prácticas](#buenas-prácticas)
-- [Errores comunes](#errores-comunes)
-- [Recursos relacionados](#recursos-relacionados)
+# Crear un microservicio
 
 > **Nota**
 > Este flujo asume que ya tienes: la solución creada, revisa primero [Crear la solución general](1-crear-solucion-general.md).
 
-Permite levantar rápidamente el esqueleto de un nuevo microservicio de forma consistente, asegurando que las referencias entre proyectos respeten la [regla de dependencias](../../arquitectura/clean-architecture.md#regla-principal-de-dependencias) de Clean Architecture. Los comandos deben ejecutarse desde la raíz donde está el archivo `.slnx`:
+Los siguientes comandos deben ejecutarse desde la raíz donde está el archivo `.slnx`:
 
-## 1. Crear la estructura de un microservicio
+## 1. Crear la estructura
 
 ```bash
-dotnet new webapi -n MicroservicioPersona.API -o MicroservicioPersona/API                       # Capa API
-dotnet new classlib -n MicroservicioPersona.Application -o MicroservicioPersona/Application      # Capa Application
-dotnet new classlib -n MicroservicioPersona.Domain -o MicroservicioPersona/Domain                # Capa Domain
-dotnet new classlib -n MicroservicioPersona.Infrastructure -o MicroservicioPersona/Infrastructure # Capa Infrastructure
+dotnet new webapi -n MicroservicioPersona.API -o MicroservicioPersona/API                           # Capa API
+dotnet new classlib -n MicroservicioPersona.Application -o MicroservicioPersona/Application         # Capa Application
+dotnet new classlib -n MicroservicioPersona.Domain -o MicroservicioPersona/Domain                   # Capa Domain
+dotnet new classlib -n MicroservicioPersona.Infrastructure -o MicroservicioPersona/Infrastructure   # Capa Infrastructure
 ```
 
 > **Nota**
@@ -27,9 +19,7 @@ dotnet new classlib -n MicroservicioPersona.Infrastructure -o MicroservicioPerso
 >
 > La opción `-o` define la **carpeta** de destino (ya con el prefijo implícito por la ruta), mientras que `-n` define el **nombre del proyecto** y del archivo `.csproj` generado (con el prefijo explícito). Por eso el archivo resultante para la capa API es `MicroservicioPersona/API/MicroservicioPersona.API.csproj`, y no `API.csproj`.
 
-## 2. Referenciar proyectos entre capas
-
-### 2.1 — Agregar los proyectos a la solución general
+## 2. Agregar los proyectos a la solución general
 
 ```bash
 dotnet sln SolucionGeneral.slnx add ./MicroservicioPersona/Domain/MicroservicioPersona.Domain.csproj
@@ -38,7 +28,7 @@ dotnet sln SolucionGeneral.slnx add ./MicroservicioPersona/Infrastructure/Micros
 dotnet sln SolucionGeneral.slnx add ./MicroservicioPersona/API/MicroservicioPersona.API.csproj
 ```
 
-### 2.2 — Referenciar entre proyectos respetando Clean Architecture
+## 3. Referenciar entre proyectos respetando Clean Architecture
 
 ```bash
 # Application → Domain
@@ -60,13 +50,7 @@ dotnet add ./MicroservicioPersona/API/MicroservicioPersona.API.csproj reference 
 > **Importante**
 > Sin la referencia `API → Infrastructure` **no es posible** registrar las implementaciones concretas (repositorios, `DbContext`, servicios externos) en el contenedor de dependencias dentro de `Program.cs`, ya que es en la capa API donde se ensamblan todas las dependencias de la aplicación.
 
-La sintaxis general del comando, aplicable a cualquier par de proyectos, es:
-
-```bash
-dotnet add <PROYECTO> reference <PROYECTO_REFERENCIADO>
-```
-
-## 3. Eliminar una referencia
+### Eliminar una referencia
 
 Si necesitas revertir una referencia entre proyectos:
 
@@ -82,12 +66,7 @@ dotnet remove ./MicroservicioPersona/API/MicroservicioPersona.API.csproj referen
 
 ## Errores comunes
 
-- ❌ Referenciar `Domain` desde `API` directamente, saltándose `Application`.
-- ❌ Olvidar agregar los proyectos a la solución (`dotnet sln add`), lo que impide que aparezcan al abrir la solución en el IDE.
-- ❌ Crear `Domain` con la plantilla `webapi` en lugar de `classlib`.
+- Olvidar agregar los proyectos a la solución (`dotnet sln add`), lo que impide que aparezcan al abrir la solución en el IDE.
+- Crear `Domain` con la plantilla `webapi` en lugar de `classlib`.
 
-## Recursos relacionados
-
-- [Clean Architecture](../../arquitectura/clean-architecture.md)
-
-⬅ [Volver al índice](README.md) | [Siguiente paso](3-paquetes-nuget.md) ➡
+[⬅](1-crear-solucion-general.md) Crear la solución general | Siguiente paso [➡](3-paquetes-nuget.md)

@@ -1,18 +1,7 @@
 # Gestión de paquetes NuGet
 
-## Tabla de contenido
-- [¿Qué es?](#qué-es)
-- [¿Para qué sirve?](#para-qué-sirve)
-- [Comandos básicos](#comandos-básicos)
-- [Paquetes esenciales recomendados por capa](#paquetes-esenciales-recomendados-por-capa)
-- [Buenas prácticas](#buenas-prácticas)
-- [Errores comunes](#errores-comunes)
-- [Recursos relacionados](#recursos-relacionados)
-
 > **Nota**
-> Este flujo asume que ya tienes: la estructura del microservicio creado (revisa primero [Crear microservicio](2-crear-microservicio.md)).
-
-## ¿Qué es?
+> Este flujo asume que ya tienes: la estructura del microservicio creado, revisa primero [Crear un microservicio](2-crear-microservicio.md).
 
 **NuGet** es el gestor de paquetes oficial de .NET. Permite instalar, actualizar y eliminar librerías de terceros (o de Microsoft) en un proyecto específico dentro de la solución.
 
@@ -79,14 +68,8 @@ dotnet add ./MicroservicioUsuarios/API/API.csproj package MediatR.Extensions.Mic
 
 ## Errores comunes
 
-- ❌ Instalar `Microsoft.EntityFrameworkCore` en la capa `Domain`, rompiendo el aislamiento del núcleo del negocio.
-- ❌ No especificar el proyecto destino (`dotnet add package` sin ruta) cuando existen varios `.csproj` en el directorio, lo que puede instalar el paquete en el proyecto incorrecto.
-- ❌ Mezclar versiones distintas del mismo paquete entre las capas de un mismo microservicio.
+- Instalar `Microsoft.EntityFrameworkCore` en la capa `Domain`, rompiendo el aislamiento del núcleo del negocio.
+- No especificar el proyecto destino (`dotnet add package` sin ruta) cuando existen varios `.csproj` en el directorio, lo que puede instalar el paquete en el proyecto incorrecto.
+- Mezclar versiones distintas del mismo paquete entre las capas de un mismo microservicio.
 
-## Recursos relacionados
-
-- [Crear un microservicio](2-crear-microservicio.md)
-- [Clean Architecture](../../arquitectura/clean-architecture.md)
-- [Entity Framework Core: migraciones](./../database/migraciones.md)
-
-⬅ [Volver al índice](README.md) | [Siguiente paso](./../database/README.md) ➡
+[⬅](2-crear-microservicio.md) Crear un microservicio | Finalizar [➡](../README.md)
