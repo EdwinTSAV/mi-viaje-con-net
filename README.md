@@ -15,10 +15,7 @@ Guía de estudio y consulta rápida para el diseño, construcción y despliegue 
 ### .NET
 - Introducción [➡](docs/dotnet/README.md)
 - Estructura de un microservicio [➡](docs/dotnet/estructura/README.md)
-- Interacción con la base de datos [➡](docs/dotnet/database/README.md)
-- Preparar proyecto [➡](docs/dotnet/preparar-proyecto.md)
-- Crear una entidad (ejemplo Persona) [➡](docs/dotnet/crear-entidad.md)
-- Publicar un microservicio [➡](docs/dotnet/publicar-proyecto.md)
+- Migraciones [➡](docs/dotnet/migraciones.md)
 
 ---
 
