@@ -1,7 +1,7 @@
 # Gestión de paquetes NuGet
 
 > **Nota**
-> Este flujo asume que ya tienes: la estructura del microservicio creado, revisa primero [Crear un microservicio](2-crear-microservicio.md).
+> Este flujo asume que ya tienes: la estructura del microservicio creado, revisa primero [Crear un microservicio](2-microservicio.md).
 
 **NuGet** es el gestor de paquetes oficial de .NET. Permite instalar, actualizar y eliminar librerías de terceros (o de Microsoft) en un proyecto específico dentro de la solución.
 
@@ -11,23 +11,18 @@ En una arquitectura por capas, **no todas las capas necesitan los mismos paquete
 
 ## Comandos básicos
 
-```bash
-# Instalar un paquete dentro de un proyecto
-dotnet add package AutoMapper
-dotnet add package AutoMapper --version 12.0.1
-
-# Eliminar un paquete dentro de un proyecto
-dotnet remove package AutoMapper
-
-# Ver paquetes instalados dentro de un proyecto
-dotnet list package
-dotnet list package --include-transitive
-```
-
-### Instalar un paquete en un proyecto específico desde la solución
+Siempre indica el proyecto destino (`.csproj`); los comandos se ejecutan desde la raíz donde está el archivo `.slnx`:
 
 ```bash
-dotnet add ./MicroservicioPersona/API package Refit
+# Instalar un paquete en un proyecto (la versión es opcional)
+dotnet add <ruta-al-proyecto>.csproj package <NombrePaquete> --version <x.y.z>
+
+# Eliminar un paquete de un proyecto
+dotnet remove <ruta-al-proyecto>.csproj package <NombrePaquete>
+
+# Ver los paquetes instalados en un proyecto
+dotnet list <ruta-al-proyecto>.csproj package
+dotnet list <ruta-al-proyecto>.csproj package --include-transitive
 ```
 
 ## Paquetes esenciales recomendados por capa
@@ -39,25 +34,21 @@ dotnet add ./MicroservicioPersona/API package Refit
 | **Application** | `FluentValidation` | Validar los Commands/Queries antes de ejecutarlos |
 | **Application** | `AutoMapper` | Mapear entre entidades del dominio y DTOs |
 | **Infrastructure** | `Microsoft.EntityFrameworkCore` | ORM para acceso a datos |
-| **Infrastructure** | `Microsoft.EntityFrameworkCore.SqlServer` (o `Npgsql.EntityFrameworkCore.PostgreSQL` para PostgreSQL) | Proveedor de base de datos específico |
-| **Infrastructure** | `Microsoft.EntityFrameworkCore.Tools` | Herramientas de CLI para migraciones |
-| **API** | `MediatR.Extensions.Microsoft.DependencyInjection` | Registrar MediatR en el contenedor de DI de la API |
+| **Infrastructure** | `Npgsql.EntityFrameworkCore.PostgreSQL` (o `Microsoft.EntityFrameworkCore.SqlServer` para SQL Server) | Proveedor de base de datos específico |
+| **Infrastructure** | `Microsoft.EntityFrameworkCore.Tools` | Comandos de migraciones para la consola del administrador de paquetes (`Add-Migration`, `Update-Database`) |
 
-Instalación completa de ejemplo desde la solución:
+Instalación completa, desde la raíz donde está el archivo `.slnx`:
 
 ```bash
 # Application
-dotnet add ./MicroservicioUsuarios/Application/Application.csproj package MediatR
-dotnet add ./MicroservicioUsuarios/Application/Application.csproj package FluentValidation
-dotnet add ./MicroservicioUsuarios/Application/Application.csproj package AutoMapper --version 14.0.0
+dotnet add ./MicroservicioPersona/Application/MicroservicioPersona.Application.csproj package MediatR
+dotnet add ./MicroservicioPersona/Application/MicroservicioPersona.Application.csproj package FluentValidation
+dotnet add ./MicroservicioPersona/Application/MicroservicioPersona.Application.csproj package AutoMapper --version 14.0.0
 
 # Infrastructure
-dotnet add ./MicroservicioUsuarios/Infrastructure/Infrastructure.csproj package Microsoft.EntityFrameworkCore
-dotnet add ./MicroservicioUsuarios/Infrastructure/Infrastructure.csproj package Microsoft.EntityFrameworkCore.SqlServer
-dotnet add ./MicroservicioUsuarios/Infrastructure/Infrastructure.csproj package Microsoft.EntityFrameworkCore.Tools
-
-# API
-dotnet add ./MicroservicioUsuarios/API/API.csproj package MediatR.Extensions.Microsoft.DependencyInjection
+dotnet add ./MicroservicioPersona/Infrastructure/MicroservicioPersona.Infrastructure.csproj package Microsoft.EntityFrameworkCore
+dotnet add ./MicroservicioPersona/Infrastructure/MicroservicioPersona.Infrastructure.csproj package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add ./MicroservicioPersona/Infrastructure/MicroservicioPersona.Infrastructure.csproj package Microsoft.EntityFrameworkCore.Tools
 ```
 
 ## Buenas prácticas
@@ -70,6 +61,8 @@ dotnet add ./MicroservicioUsuarios/API/API.csproj package MediatR.Extensions.Mic
 
 - Instalar `Microsoft.EntityFrameworkCore` en la capa `Domain`, rompiendo el aislamiento del núcleo del negocio.
 - No especificar el proyecto destino (`dotnet add package` sin ruta) cuando existen varios `.csproj` en el directorio, lo que puede instalar el paquete en el proyecto incorrecto.
+- Usar el nombre corto del archivo (`Application.csproj`) en lugar del nombre real del proyecto (`MicroservicioPersona.Application.csproj`); revisa cómo se generan los nombres en [Crear un microservicio](2-microservicio.md).
 - Mezclar versiones distintas del mismo paquete entre las capas de un mismo microservicio.
+- Instalar paquetes de EF Core (`Microsoft.EntityFrameworkCore`, el proveedor y `Tools`) con versiones mayores distintas entre sí; deben compartir la misma versión mayor.
 
-[⬅](2-crear-microservicio.md) Crear un microservicio | Finalizar [➡](../README.md)
+[⬅](2-microservicio.md) Crear un microservicio | Conexión a la base de datos [➡](4-conexion-bd.md)

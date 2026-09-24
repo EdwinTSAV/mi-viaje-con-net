@@ -1,23 +1,23 @@
 # Crear un microservicio
 
 > **Nota**
-> Este flujo asume que ya tienes: la solución creada, revisa primero [Crear la solución general](1-crear-solucion-general.md).
+> Este flujo asume que ya tienes: la solución creada, revisa primero [Crear la solución general](1-solucion-general.md).
 
 Los siguientes comandos deben ejecutarse desde la raíz donde está el archivo `.slnx`:
 
 ## 1. Crear la estructura
 
 ```bash
-dotnet new webapi -n MicroservicioPersona.API -o MicroservicioPersona/API                           # Capa API
+dotnet new webapi -n MicroservicioPersona.API -o MicroservicioPersona/API --use-controllers         # Capa API
 dotnet new classlib -n MicroservicioPersona.Application -o MicroservicioPersona/Application         # Capa Application
 dotnet new classlib -n MicroservicioPersona.Domain -o MicroservicioPersona/Domain                   # Capa Domain
 dotnet new classlib -n MicroservicioPersona.Infrastructure -o MicroservicioPersona/Infrastructure   # Capa Infrastructure
 ```
 
 > **Nota**
-> `API` se genera con la plantilla `webapi` porque expone endpoints HTTP. Las demás capas (`Application`, `Domain`, `Infrastructure`) se generan como `classlib`, ya que son bibliotecas de clases sin punto de entrada propio.
+> `API` se genera con la plantilla `webapi` porque expone endpoints HTTP. La opción `--use-controllers` es necesaria porque, desde .NET 8, la plantilla genera Minimal APIs por defecto, y los siguientes documentos usan controladores (`AddControllers()` / `MapControllers()`). Las demás capas (`Application`, `Domain`, `Infrastructure`) se generan como `classlib`, ya que son bibliotecas de clases sin punto de entrada propio.
 >
-> La opción `-o` define la **carpeta** de destino (ya con el prefijo implícito por la ruta), mientras que `-n` define el **nombre del proyecto** y del archivo `.csproj` generado (con el prefijo explícito). Por eso el archivo resultante para la capa API es `MicroservicioPersona/API/MicroservicioPersona.API.csproj`, y no `API.csproj`.
+> La opción `-o` define la **carpeta** de destino, mientras que `-n` define el **nombre del proyecto** y del archivo `.csproj` generado (con el prefijo explícito). Por eso el archivo resultante para la capa API es `MicroservicioPersona/API/MicroservicioPersona.API.csproj`, y no `API.csproj`.
 
 ## 2. Agregar los proyectos a la solución general
 
@@ -58,6 +58,12 @@ Si necesitas revertir una referencia entre proyectos:
 dotnet remove ./MicroservicioPersona/API/MicroservicioPersona.API.csproj reference ./MicroservicioPersona/Infrastructure/MicroservicioPersona.Infrastructure.csproj
 ```
 
+## 4. Verificar que compila
+
+```bash
+dotnet build SolucionGeneral.slnx
+```
+
 ## Buenas prácticas
 
 - Usa un prefijo consistente por microservicio en el nombre de los **proyectos** (`-n MicroservicioPersona.API`), no necesariamente en el nombre de la carpeta (`-o`), ya que la carpeta ya queda anidada bajo `MicroservicioPersona/` y el prefijo ahí sería redundante.
@@ -68,5 +74,6 @@ dotnet remove ./MicroservicioPersona/API/MicroservicioPersona.API.csproj referen
 
 - Olvidar agregar los proyectos a la solución (`dotnet sln add`), lo que impide que aparezcan al abrir la solución en el IDE.
 - Crear `Domain` con la plantilla `webapi` en lugar de `classlib`.
+- Crear `API` sin `--use-controllers`: el proyecto arranca, pero `AddControllers()` / `MapControllers()` no tienen controladores que mapear y la plantilla incluye endpoints de ejemplo con Minimal APIs.
 
-[⬅](1-crear-solucion-general.md) Crear la solución general | Siguiente paso [➡](3-paquetes-nuget.md)
+[⬅](1-solucion-general.md) Crear la solución general | Gestión de paquetes NuGet [➡](3-paquetes-nuget.md)
