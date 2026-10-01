@@ -56,22 +56,6 @@ app.MapControllers();
 > [!NOTE]
 > Los registros de servicios (`builder.Services...`) van **antes** de `builder.Build()`; `app.MapControllers()` va **después**. El resto del archivo generado por la plantilla se mantiene igual.
 
-## Siguiente paso: Fase 1
-
-Con esto queda completa la **Fase 0**: el microservicio compila, se conecta a la base de datos y despacha Commands/Queries con MediatR. Todavía no valida los datos de entrada ni maneja casos como actualizar o eliminar una entidad que no existe. Eso corresponde a la **Fase 1** de la ruta de aprendizaje (FluentValidation + Pipeline Behaviors, excepciones, middleware global y respuestas estandarizadas).
-
-> [!NOTE]
-> Cuando llegue esa fase, **este mismo archivo** (`Application/DependencyInjection.cs`) es el que se extenderá: ahí se agregará `services.AddValidatorsFromAssembly(...)` (requiere el paquete `FluentValidation.DependencyInjectionExtensions`) y el registro del `ValidationBehavior`. No será necesario crear un archivo nuevo para eso.
->
-> El `ValidationBehavior` no viene incluido en MediatR ni en ASP.NET: es una clase que se implementa (`IPipelineBehavior<TRequest, TResponse>`) y se registra con `cfg.AddOpenBehavior(typeof(ValidationBehavior<,>))`.
-
-## ¿Qué falta para completar la Fase 0?
-
-**Validaciones, manejo de errores y respuestas uniformes**: por ahora, los Commands de `Crear`/`Actualizar` no validan nada (por ejemplo, que `NroDni` no esté vacío) ni se maneja el caso de que la entidad no exista al actualizar/eliminar. Esto corresponde a la **Fase 1** de la ruta de aprendizaje (FluentValidation + Pipeline Behaviors, excepciones, middleware global y respuestas estandarizadas).
-
-> [!NOTE]
-> Cuando llegue esa fase, **este mismo archivo** (`Application/DependencyInjection.cs`) es el que se extenderá — ahí se agregará `services.AddValidatorsFromAssembly(...)` y el registro del `ValidationBehavior` como Pipeline Behavior de MediatR. No será necesario crear un archivo nuevo para eso.
-
 ## Buenas prácticas
 
 - No agregues lógica de negocio dentro de `DependencyInjection.cs`; su única responsabilidad es registrar servicios, nunca ejecutarlos.
