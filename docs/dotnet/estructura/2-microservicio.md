@@ -1,6 +1,6 @@
 # Crear un microservicio
 
-> **Nota**
+> [!NOTE]
 > Este flujo asume que ya tienes: la solución creada, revisa primero [Crear la solución general](1-solucion-general.md).
 
 Los siguientes comandos deben ejecutarse desde la raíz donde está el archivo `.slnx`:
@@ -14,7 +14,7 @@ dotnet new classlib -n MicroservicioPersona.Domain -o MicroservicioPersona/Domai
 dotnet new classlib -n MicroservicioPersona.Infrastructure -o MicroservicioPersona/Infrastructure   # Capa Infrastructure
 ```
 
-> **Nota**
+> [!NOTE]
 > `API` se genera con la plantilla `webapi` porque expone endpoints HTTP. La opción `--use-controllers` es necesaria porque, desde .NET 8, la plantilla genera Minimal APIs por defecto, y los siguientes documentos usan controladores (`AddControllers()` / `MapControllers()`). Las demás capas (`Application`, `Domain`, `Infrastructure`) se generan como `classlib`, ya que son bibliotecas de clases sin punto de entrada propio.
 >
 > La opción `-o` define la **carpeta** de destino, mientras que `-n` define el **nombre del proyecto** y del archivo `.csproj` generado (con el prefijo explícito). Por eso el archivo resultante para la capa API es `MicroservicioPersona/API/MicroservicioPersona.API.csproj`, y no `API.csproj`.
@@ -47,7 +47,7 @@ dotnet add ./MicroservicioPersona/API/MicroservicioPersona.API.csproj reference 
 dotnet add ./MicroservicioPersona/API/MicroservicioPersona.API.csproj reference ./MicroservicioPersona/Infrastructure/MicroservicioPersona.Infrastructure.csproj
 ```
 
-> **Importante**
+> [!IMPORTANT]
 > Sin la referencia `API → Infrastructure` **no es posible** registrar las implementaciones concretas (repositorios, `DbContext`, servicios externos) en el contenedor de dependencias dentro de `Program.cs`, ya que es en la capa API donde se ensamblan todas las dependencias de la aplicación.
 
 ### Eliminar una referencia

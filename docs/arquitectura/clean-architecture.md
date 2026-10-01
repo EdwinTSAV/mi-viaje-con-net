@@ -24,6 +24,7 @@ No es estrictamente necesaria en:
 
 ## Regla principal de dependencias
 
+> [!TIP]
 > **Regla de oro:** las dependencias **solo apuntan hacia adentro**. Ninguna capa interna debe conocer a una capa externa.
 
 ```mermaid

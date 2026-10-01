@@ -1,6 +1,6 @@
 # Configuración de conexión de un microservicio a la base de datos
 
-> **Nota**
+> [!NOTE]
 > Este flujo asume que ya tienes la estructura y los paquetes de un microservicio, revisa primero [Crear un microservicio](2-microservicio.md) y [Gestión de paquetes NuGet](3-paquetes-nuget.md).
 
 Este documento cubre la **configuración mínima necesaria** para conectar la capa `Infrastructure` de un microservicio a una base de datos real a través de **Entity Framework Core**.
@@ -68,7 +68,7 @@ En `API/appsettings.json`:
 }
 ```
 
-> **Advertencia**
+> [!WARNING]
 > El ejemplo anterior es válido únicamente para un entorno **local de desarrollo**. Nunca subas contraseñas reales al repositorio dentro de `appsettings.json`. Para credenciales locales usa `dotnet user-secrets` (ver abajo), y para staging o producción usa **Azure Key Vault** o las **App Settings** del servicio de hosting.
 
 ### Guardar la cadena de conexión con user-secrets
@@ -81,7 +81,7 @@ dotnet user-secrets init --project ./MicroservicioPersona/API/MicroservicioPerso
 dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Host=localhost;Port=5432;Database=MiBD;Username=postgres;Password=<tu-contraseña>" --project ./MicroservicioPersona/API/MicroservicioPersona.API.csproj
 ```
 
-> **Nota**
+> [!NOTE]
 > Los secretos se guardan fuera del repositorio, en el perfil de tu usuario, y solo se cargan cuando el entorno es `Development`. Si defines la misma clave en `appsettings.json` y en user-secrets, el valor de user-secrets es el que se usa.
 
 ## 4. Registrar Infrastructure

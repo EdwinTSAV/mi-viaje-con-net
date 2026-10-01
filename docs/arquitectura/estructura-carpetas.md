@@ -56,7 +56,7 @@ Application/
 - **Services**: contratos que representan dependencias externas al dominio, como servicios de correo, almacenamiento de archivos, caché, autenticación o mensajería.
 - **DependencyInjection.cs**: método de extensión `AddApplication()` que registra todos los servicios de esta capa.
 
-> **Nota**>
+> [!NOTE]
 > Cada carpeta de caso de uso (por ejemplo, `CreateUsuario`) agrupa el comando, su handler y su validador en un mismo lugar, de ser el caso también almacena su DTO. Este enfoque se conoce como **Vertical Slice**, ya que organiza el código por funcionalidad en lugar de hacerlo por tipo de archivo.
 
 ## Infrastructure

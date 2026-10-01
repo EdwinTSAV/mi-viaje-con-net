@@ -1,6 +1,6 @@
 # Gestión de paquetes NuGet
 
-> **Nota**
+> [!NOTE]
 > Este flujo asume que ya tienes: la estructura del microservicio creado, revisa primero [Crear un microservicio](2-microservicio.md).
 
 **NuGet** es el gestor de paquetes oficial de .NET. Permite instalar, actualizar y eliminar librerías de terceros (o de Microsoft) en un proyecto específico dentro de la solución.
